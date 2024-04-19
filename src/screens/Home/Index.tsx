@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Dimensions,
   FlatList,
@@ -7,6 +7,8 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Animated,
+  StyleSheet,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import FontIcon from 'react-native-vector-icons/FontAwesome6';
@@ -149,7 +151,14 @@ const HomeScreen = () => {
           }}>
           480da
         </Text>
-        <View style={{flex: 1, flexDirection: 'row', gap: 10}}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            gap: 10,
+            // justifyContent: 'center',
+            alignItems: 'center',
+          }}>
           <Text
             style={{
               fontSize: 18,
@@ -158,7 +167,9 @@ const HomeScreen = () => {
             }}>
             630da
           </Text>
-          <Text style={{fontSize: 14, color: '#888'}}>6</Text>
+          <Text style={{fontSize: 16, color: '#888', fontWeight: 'bold'}}>
+            6
+          </Text>
         </View>
         {/* Add other product details as needed */}
         <Text style={{fontSize: 14, color: 'black'}}>
@@ -168,33 +179,44 @@ const HomeScreen = () => {
       <TouchableOpacity
         style={{
           position: 'absolute',
-          backgroundColor: 'red',
-          top: '50%',
-          right: 20,
+          backgroundColor: '#E48C06',
+          top: '45%',
+          right: 15,
+          borderRadius: 50,
+          height: 40,
+          width: 40,
+          justifyContent: 'center',
+          alignItems: 'center',
         }}>
-        <Text>+</Text>
+        <FontIcon name="plus" size={24} color="white" />
+        {/* <Text></Text> */}
       </TouchableOpacity>
     </View>
   );
+
   return (
-    <ScrollView>
+    <View>
       <View
         style={{
-          flex: 1,
+          // flex: 1,
           paddingTop: 15,
-          paddingBottom: 25,
+          paddingBottom: 30,
           paddingLeft: 15,
           paddingRight: 15,
           backgroundColor: '#E48C06',
           borderBottomRightRadius: 20,
           borderBottomLeftRadius: 20,
+          // borderWidth: 3,
         }}>
         <View
           style={{
-            flex: 1,
+            // flex: 1,
             justifyContent: 'space-between',
             flexDirection: 'row',
             alignItems: 'center',
+            // borderWidth: 3,
+            height: 55,
+            // paddingVertical: 20,
           }}>
           <View style={{flex: 1}}>
             <TouchableOpacity
@@ -234,7 +256,7 @@ const HomeScreen = () => {
         </View>
         <View
           style={{
-            flex: 1,
+            // flex: 1,
             marginTop: 20,
             position: 'relative',
           }}>
@@ -257,8 +279,9 @@ const HomeScreen = () => {
           />
         </View>
       </View>
-      <View style={{flex: 1, marginTop: 20}}>
-        {/* <FlatList
+      <ScrollView style={{}}>
+        <View style={{flex: 1, marginTop: 20}}>
+          {/* <FlatList
           horizontal
           data={data}
           renderItem={renderItem}
@@ -266,42 +289,44 @@ const HomeScreen = () => {
           showsHorizontalScrollIndicator={false}
           // style={{flex: 1, gap: 10}}
         /> */}
-        <Carousel
-          // layout={'default'}
-          ref={c => {
-            this._carousel = c;
-          }}
-          data={data}
-          renderItem={renderItem}
-          sliderWidth={width}
-          itemWidth={320}
-        />
-      </View>
-      <View style={{flex: 1, marginTop: 20}}>
-        <FlatList
-          horizontal
-          data={data}
-          renderItem={renderCategoryItem}
-          keyExtractor={item => item.id}
-          showsHorizontalScrollIndicator={false}
-          style={{flex: 1}}
-        />
-      </View>
-      <View
-        style={{
-          flex: 1,
-          marginTop: 20,
-          alignItems: 'center',
-          gap: 10,
-        }}>
-        <FlatList
-          data={data}
-          renderItem={renderProductItem}
-          keyExtractor={item => item.id}
-          numColumns={2}
-        />
-      </View>
-    </ScrollView>
+          <Carousel
+            // layout={'default'}
+            ref={c => {
+              this._carousel = c;
+            }}
+            data={data}
+            renderItem={renderItem}
+            sliderWidth={width}
+            itemWidth={320}
+          />
+        </View>
+        <View style={{flex: 1, marginTop: 20}}>
+          <FlatList
+            horizontal
+            data={data}
+            renderItem={renderCategoryItem}
+            keyExtractor={item => item.id}
+            showsHorizontalScrollIndicator={false}
+            style={{flex: 1}}
+          />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            marginTop: 20,
+            alignItems: 'center',
+            gap: 10,
+            paddingBottom: 200,
+          }}>
+          <FlatList
+            data={data}
+            renderItem={renderProductItem}
+            keyExtractor={item => item.id}
+            numColumns={2}
+          />
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
